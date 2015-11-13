@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodGood", "FoodGood\FoodGood.csproj", "{77CD6A26-326A-4DD3-ABFB-44CB871A340E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ultra.DomainModel", "Ultra.DomainModel\Ultra.DomainModel.csproj", "{800361C0-78C6-4CCF-A313-1BB0CF86B8FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ultra.Services", "Ultra.Services\Ultra.Services.csproj", "{618AED09-8010-4AC1-841D-5AD8E7C363C6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{77CD6A26-326A-4DD3-ABFB-44CB871A340E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77CD6A26-326A-4DD3-ABFB-44CB871A340E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77CD6A26-326A-4DD3-ABFB-44CB871A340E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77CD6A26-326A-4DD3-ABFB-44CB871A340E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{800361C0-78C6-4CCF-A313-1BB0CF86B8FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{800361C0-78C6-4CCF-A313-1BB0CF86B8FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{800361C0-78C6-4CCF-A313-1BB0CF86B8FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{800361C0-78C6-4CCF-A313-1BB0CF86B8FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{618AED09-8010-4AC1-841D-5AD8E7C363C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{618AED09-8010-4AC1-841D-5AD8E7C363C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{618AED09-8010-4AC1-841D-5AD8E7C363C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{618AED09-8010-4AC1-841D-5AD8E7C363C6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

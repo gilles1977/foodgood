@@ -10,7 +10,7 @@ namespace Ultra.DomainModel
     [DataContract]
     public class SearchQuery
     {
-        [DataMember(Name = "q")]
+        [DataMember(Name = "q", IsRequired = true)]
         public string Q { get; set; }
         [DataMember(Name = "fg", EmitDefaultValue = false)]
         public string Fg { get; set; }

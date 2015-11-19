@@ -11,19 +11,41 @@ using Ultra.Services.Contracts;
 
 namespace Ultra.Services
 {
-    public class UsdaApiClientService : IApiClientService<SearchQuery, SearchResult>
+    public class UsdaApiClientService : IApiClientService
     {
-        public async Task<SearchResult> Search(SearchQuery query)
+        public UsdaApiClientService() : this("", "", "", "r", 50, 0)
+        {
+        }
+
+        public UsdaApiClientService(string apiKey, string apiUrl, string foodGroup, string sortType, int maxResults, int offset)
+        {
+            ApiKey = apiKey;
+            ApiUrl = apiUrl;
+            FoodGroup = foodGroup;
+            SortType = sortType;
+            MaxResults = maxResults;
+            Offset = offset;
+        }
+
+        public string ApiKey { get; set; }
+        public string ApiUrl { get; set; }
+        public string FoodGroup { get; set; }
+        public string SortType { get; set; }
+        public int MaxResults { get; set; }
+        public int Offset { get; set; }
+
+        public async Task<string> Search(string query)
         {
             using (var client = new HttpClient())
             {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes("eIQTHeqjEITpxwy1AcdHXijwJFRwI8WDSasId5pK:")));
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes(ApiKey+":")));
 
-                var json = JsonConvert.SerializeObject(query);
+                var search = new SearchQuery() { Q = query, Fg = FoodGroup, Max = MaxResults.ToString(), Offset = Offset.ToString(), Sort = SortType };
+                var json = JsonConvert.SerializeObject(search);
                 var content = new StringContent(json);
                 content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-                var response = await client.PostAsync("http://api.nal.usda.gov/ndb/search", content);
+                var response = await client.PostAsync(ApiUrl, content);
 
                 if (!response.IsSuccessStatusCode)
                     throw new ApplicationException(
@@ -31,7 +53,7 @@ namespace Ultra.Services
 
                 var str = await response.Content.ReadAsStringAsync();
 
-                return JsonConvert.DeserializeObject<SearchResult>(str);
+                return str;
             }
         }
     }

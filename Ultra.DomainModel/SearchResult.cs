@@ -1,28 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Ultra.DomainModel
 {
+    [DataContract]
     public class SearchResult
     {
+        [DataMember(Name = "list")]
+        public Result List { get; set; }
+    }
+    
+    public class Result
+    {
+        [DataMember(Name = "q")]
         public string Q { get; set; }
-        public int Start { get; set; }
-        public int End { get; set; }
-        public int Offset { get; set; }
-        public int Total { get; set; }
-        public string Sort { get; set; }
-        public string Fg { get; set; }
+        [DataMember(Name = "sr")]
         public string Sr { get; set; }
-        public IList<SearchItem> Items { get; set; }
+        [DataMember(Name = "start")]
+        public int Start { get; set; }
+        [DataMember(Name = "end")]
+        public int End { get; set; }
+        [DataMember(Name = "total")]
+        public int Total { get; set; }
+        [DataMember(Name = "group")]
+        public string Fg { get; set; }
+        [DataMember(Name = "sort")]
+        public string Sort { get; set; }
+        [DataMember(Name = "item")]
+        public IList<SearchItem> Item { get; set; }
     }
 
     public class SearchItem
     {
-        public string Ndbno { get; set; }
-        public string Name { get; set; }
+        [DataMember(Name = "offset")]
+        public int Offset { get; set; }
+        [DataMember(Name = "group")]
         public string Group { get; set; }
+        [DataMember(Name = "name")]
+        public string Name { get; set; }
+        [DataMember(Name = "ndbno")]
+        public string Ndbno { get; set; }
+
     }
 }

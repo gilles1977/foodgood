@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Ultra.Services.Contracts
 {
-    public interface IApiClientService<TQuery, TResult>
+    public interface IApiClientService
     {
-        Task<TResult> Search(TQuery query);
+        Task<string> Search(string query);
     }
 }

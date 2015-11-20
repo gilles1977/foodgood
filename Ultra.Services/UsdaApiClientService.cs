@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -25,6 +26,9 @@ namespace Ultra.Services
             SortType = sortType;
             MaxResults = maxResults;
             Offset = offset;
+            Proxy = WebRequest.GetSystemWebProxy();
+            Proxy.Credentials = CredentialCache.DefaultNetworkCredentials;
+
         }
 
         public string ApiKey { get; set; }
@@ -33,28 +37,54 @@ namespace Ultra.Services
         public string SortType { get; set; }
         public int MaxResults { get; set; }
         public int Offset { get; set; }
+        public IWebProxy Proxy { get; set; }
 
         public async Task<string> Search(string query)
         {
-            using (var client = new HttpClient())
+            using (var client = GetHttpClient())
             {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes(ApiKey+":")));
-
                 var search = new SearchQuery() { Q = query, Fg = FoodGroup, Max = MaxResults.ToString(), Offset = Offset.ToString(), Sort = SortType };
-                var json = JsonConvert.SerializeObject(search);
-                var content = new StringContent(json);
-                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+               
+                var response = await client.PostAsync(ApiUrl, GetContent(search));
 
-                var response = await client.PostAsync(ApiUrl, content);
-
-                if (!response.IsSuccessStatusCode)
-                    throw new ApplicationException(
-                        $"Error while requesting API: status {response.StatusCode}, response: {await response.Content.ReadAsStringAsync()}");
-
-                var str = await response.Content.ReadAsStringAsync();
-
-                return str;
+                return await ProcessResponse(response);
             }
+        }
+
+        public async Task<string> GetNutrientReport(NutrientReportQuery query)
+        {
+            using (var client = GetHttpClient())
+            {
+                var response = await client.PostAsync(ApiUrl, GetContent(query));
+
+                return await ProcessResponse(response);
+            }
+        }
+
+        private HttpClient GetHttpClient()
+        {
+            var client = new HttpClient(new HttpClientHandler() {Proxy = Proxy});
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes(ApiKey + ":")));
+            return client;
+        }
+
+        private HttpContent GetContent<T>(T query)
+        {
+            var json = JsonConvert.SerializeObject(query);
+            var content = new StringContent(json);
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            return content;
+        }
+
+        private async Task<string> ProcessResponse(HttpResponseMessage response)
+        {
+            if (!response.IsSuccessStatusCode)
+                throw new ApplicationException(
+                    $"Error while requesting API: status {response.StatusCode}, response: {await response.Content.ReadAsStringAsync()}");
+
+            var str = await response.Content.ReadAsStringAsync();
+
+            return str;
         }
     }
 }

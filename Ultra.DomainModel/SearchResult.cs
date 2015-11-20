@@ -11,7 +11,7 @@ namespace Ultra.DomainModel
     public class SearchResult
     {
         [DataMember(Name = "list")]
-        public Result List { get; set; }
+        public Result Result { get; set; }
     }
     
     public class Result
@@ -27,7 +27,7 @@ namespace Ultra.DomainModel
         [DataMember(Name = "total")]
         public int Total { get; set; }
         [DataMember(Name = "group")]
-        public string Fg { get; set; }
+        public string Group { get; set; }
         [DataMember(Name = "sort")]
         public string Sort { get; set; }
         [DataMember(Name = "item")]

@@ -19,19 +19,19 @@ namespace Ultra.Services.Tests
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.9.0.77")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [Microsoft.VisualStudio.TestTools.UnitTesting.TestClassAttribute()]
-    public partial class UsdaApiClientServiceFeature
+    public partial class UsdaApiSearchFeature
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "UsdaApiClientService.feature"
+#line 1 "UsdaApiSearch.feature"
 #line hidden
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.ClassInitializeAttribute()]
         public static void FeatureSetup(Microsoft.VisualStudio.TestTools.UnitTesting.TestContext testContext)
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "UsdaApiClientService", "In order to get list of available foods\r\nAs an API user\r\nI want to get food list " +
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "UsdaApiSearch", "In order to get list of available foods\r\nAs an API user\r\nI want to get food list " +
                     "result on a given keyword", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
@@ -47,9 +47,9 @@ namespace Ultra.Services.Tests
         public virtual void TestInitialize()
         {
             if (((TechTalk.SpecFlow.FeatureContext.Current != null) 
-                        && (TechTalk.SpecFlow.FeatureContext.Current.FeatureInfo.Title != "UsdaApiClientService")))
+                        && (TechTalk.SpecFlow.FeatureContext.Current.FeatureInfo.Title != "UsdaApiSearch")))
             {
-                Ultra.Services.Tests.UsdaApiClientServiceFeature.FeatureSetup(null);
+                Ultra.Services.Tests.UsdaApiSearchFeature.FeatureSetup(null);
             }
         }
         
@@ -71,7 +71,7 @@ namespace Ultra.Services.Tests
         
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute()]
         [Microsoft.VisualStudio.TestTools.UnitTesting.DescriptionAttribute("Search food with keyword")]
-        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "UsdaApiClientService")]
+        [Microsoft.VisualStudio.TestTools.UnitTesting.TestPropertyAttribute("FeatureTitle", "UsdaApiSearch")]
         [Microsoft.VisualStudio.TestTools.UnitTesting.TestCategoryAttribute("mytag")]
         public virtual void SearchFoodWithKeyword()
         {

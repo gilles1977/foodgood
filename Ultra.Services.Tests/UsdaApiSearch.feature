@@ -1,4 +1,4 @@
-﻿Feature: UsdaApiClientService
+﻿Feature: UsdaApiSearch
 	In order to get list of available foods
 	As an API user
 	I want to get food list result on a given keyword

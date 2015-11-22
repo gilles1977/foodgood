@@ -59,19 +59,28 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UsdaApiClientService.feature.cs">
+    <Compile Include="UsdaApiNutrientReport.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>UsdaApiClientService.feature</DependentUpon>
+      <DependentUpon>UsdaApiNutrientReport.feature</DependentUpon>
     </Compile>
-    <Compile Include="UsdaApiClientServiceSteps.cs" />
+    <Compile Include="UsdaApiSearch.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UsdaApiSearch.feature</DependentUpon>
+    </Compile>
+    <Compile Include="UsdaApiSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="UsdaApiClientService.feature">
+    <None Include="UsdaApiNutrientReport.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>UsdaApiClientService.feature.cs</LastGenOutput>
+      <LastGenOutput>UsdaApiNutrientReport.feature.cs</LastGenOutput>
+    </None>
+    <None Include="UsdaApiSearch.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>UsdaApiSearch.feature.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

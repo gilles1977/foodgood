@@ -84,7 +84,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 9
  testRunner.And("I setup \"http://api.nal.usda.gov/ndb/search\" as an API URL", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 10
- testRunner.When("I search \"banana\" with the API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I search \"{ \"q\":\"banana\" }\" with the API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 11
  testRunner.Then("the result should be a list on the screen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden

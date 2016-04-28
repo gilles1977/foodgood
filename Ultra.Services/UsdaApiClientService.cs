@@ -41,11 +41,17 @@ namespace Ultra.Services
 
         public async Task<string> Search(string query)
         {
+            var searchQuery = JsonConvert.DeserializeObject<SearchQuery>(query);
+                //new SearchQuery() { Q = query, Fg = FoodGroup, Max = MaxResults.ToString(), Offset = Offset.ToString(), Sort = SortType };
+
+            return await Search(searchQuery);
+        }
+
+        public async Task<string> Search(SearchQuery query)
+        {
             using (var client = GetHttpClient())
             {
-                var search = new SearchQuery() { Q = query, Fg = FoodGroup, Max = MaxResults.ToString(), Offset = Offset.ToString(), Sort = SortType };
-               
-                var response = await client.PostAsync(ApiUrl, GetContent(search));
+                var response = await client.PostAsync(ApiUrl, GetContent(query));
 
                 return await ProcessResponse(response);
             }

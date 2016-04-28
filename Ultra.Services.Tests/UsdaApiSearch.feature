@@ -7,5 +7,5 @@
 Scenario: Search food with keyword
 	Given I setup "eIQTHeqjEITpxwy1AcdHXijwJFRwI8WDSasId5pK" as an API key
 	And I setup "http://api.nal.usda.gov/ndb/search" as an API URL
-	When I search "banana" with the API
+	When I search "{ "q":"banana" }" with the API
 	Then the result should be a list on the screen

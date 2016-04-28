@@ -14,18 +14,14 @@ namespace Ultra.Services
 {
     public class UsdaApiClientService : IApiClientService
     {
-        public UsdaApiClientService() : this("", "", "", "r", 50, 0)
+        public UsdaApiClientService() : this("", "")
         {
         }
 
-        public UsdaApiClientService(string apiKey, string apiUrl, string foodGroup, string sortType, int maxResults, int offset)
+        public UsdaApiClientService(string apiKey, string apiUrl)
         {
             ApiKey = apiKey;
             ApiUrl = apiUrl;
-            FoodGroup = foodGroup;
-            SortType = sortType;
-            MaxResults = maxResults;
-            Offset = offset;
             Proxy = WebRequest.GetSystemWebProxy();
             Proxy.Credentials = CredentialCache.DefaultNetworkCredentials;
 
@@ -33,10 +29,6 @@ namespace Ultra.Services
 
         public string ApiKey { get; set; }
         public string ApiUrl { get; set; }
-        public string FoodGroup { get; set; }
-        public string SortType { get; set; }
-        public int MaxResults { get; set; }
-        public int Offset { get; set; }
         public IWebProxy Proxy { get; set; }
 
         public async Task<string> Search(string query)

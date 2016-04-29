@@ -14,57 +14,69 @@ namespace Ultra.Services
 {
     public class UsdaApiClientService : IApiClientService
     {
+        private HttpClient _httpClient;
+        private string _apiKey;
+
         public UsdaApiClientService() : this("", "")
         {
         }
 
         public UsdaApiClientService(string apiKey, string apiUrl)
         {
-            ApiKey = apiKey;
-            ApiUrl = apiUrl;
             Proxy = WebRequest.GetSystemWebProxy();
             Proxy.Credentials = CredentialCache.DefaultNetworkCredentials;
-
+            _httpClient = new HttpClient(new HttpClientHandler() { Proxy = Proxy });
+            ApiKey = apiKey;
+            ApiUrl = apiUrl;
         }
 
-        public string ApiKey { get; set; }
+        public string ApiKey
+        {
+            get { return _apiKey; }
+            set
+            {
+                _apiKey = value;
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes(value + ":")));
+            }
+        }
         public string ApiUrl { get; set; }
         public IWebProxy Proxy { get; set; }
 
         public async Task<string> Search(string query)
         {
-            var searchQuery = JsonConvert.DeserializeObject<SearchQuery>(query);
-                //new SearchQuery() { Q = query, Fg = FoodGroup, Max = MaxResults.ToString(), Offset = Offset.ToString(), Sort = SortType };
+            try
+            {
+                var searchQuery = JsonConvert.DeserializeObject<SearchQuery>(query);
 
-            return await Search(searchQuery);
+                return await Search(searchQuery);
+            }
+            catch (JsonSerializationException ex)
+            {
+                //TODO logging
+                throw;
+            }
         }
 
         public async Task<string> Search(SearchQuery query)
         {
-            using (var client = GetHttpClient())
-            {
-                var response = await client.PostAsync(ApiUrl, GetContent(query));
+            var response = await _httpClient.PostAsync(ApiUrl, GetContent(query));
 
-                return await ProcessResponse(response);
-            }
+            return await ProcessResponse(response);
         }
 
         public async Task<string> GetNutrientReport(NutrientReportQuery query)
         {
-            using (var client = GetHttpClient())
-            {
-                var response = await client.PostAsync(ApiUrl, GetContent(query));
+            var response = await _httpClient.PostAsync(ApiUrl, GetContent(query));
 
-                return await ProcessResponse(response);
-            }
+            return await ProcessResponse(response);
         }
 
-        private HttpClient GetHttpClient()
-        {
-            var client = new HttpClient(new HttpClientHandler() {Proxy = Proxy});
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes(ApiKey + ":")));
-            return client;
-        }
+        //private HttpClient GetHttpClient()
+        //{
+        //    var client = new HttpClient(new HttpClientHandler() {Proxy = Proxy});
+        //    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes(ApiKey + ":")));
+        //    return client;
+        //}
 
         private HttpContent GetContent<T>(T query)
         {

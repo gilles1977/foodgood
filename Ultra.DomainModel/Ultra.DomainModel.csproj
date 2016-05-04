@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NutrientListQuery.cs" />
+    <Compile Include="NutrientListResult.cs" />
     <Compile Include="NutrientReportResult.cs" />
     <Compile Include="NutrientReportQuery.cs" />
     <Compile Include="SearchQuery.cs" />

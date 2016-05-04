@@ -59,6 +59,11 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UsdaApiList.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UsdaApiList.feature</DependentUpon>
+    </Compile>
     <Compile Include="UsdaApiNutrientReport.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -74,6 +79,10 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="UsdaApiList.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>UsdaApiList.feature.cs</LastGenOutput>
+    </None>
     <None Include="UsdaApiNutrientReport.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>UsdaApiNutrientReport.feature.cs</LastGenOutput>

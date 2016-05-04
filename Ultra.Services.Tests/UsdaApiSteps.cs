@@ -48,7 +48,7 @@ namespace Ultra.Services.Tests
         {
             var query = new NutrientReportQuery()
             { Nutrients = new List<String>() { nutrient1, nutrient2 }, FoodGroup = foodGroup, Max = 50, Offset = 0 };
-            _result = _service.GetNutrientReport(query).Result;
+            _result = _service.Retrieve(query).Result;
         }
                 
         [Then(@"the result should be a report of nutrients")]
@@ -59,5 +59,24 @@ namespace Ultra.Services.Tests
             var nutrientReport = JsonConvert.DeserializeObject<NutrientReportResult>(_result);
             Assert.IsNotNull(nutrientReport);
         }
+
+        [When(@"I query the API for a list of ""(.*)""")]
+        public void WhenIQueryTheAPIForAListOf(string listType)
+        {
+            var query = new NutrientListQuery()
+            {
+                ListType = listType
+            };
+            _result = _service.Retrieve(query).Result;
+        }
+
+        [Then(@"the result should show a list of foods on the screen")]
+        public void ThenTheResultShouldShowAListOfFoodsOnTheScreen()
+        {
+            var nutrientList = JsonConvert.DeserializeObject<NutrientListResult>(_result);
+            Assert.IsNotNull(nutrientList);
+            Assert.IsTrue(nutrientList.Items.Count > 0);
+        }
+
     }
 }

@@ -48,7 +48,7 @@ namespace Ultra.Services
             {
                 var searchQuery = JsonConvert.DeserializeObject<SearchQuery>(query);
 
-                return await Search(searchQuery);
+                return await Retrieve(searchQuery);
             }
             catch (JsonSerializationException ex)
             {
@@ -57,19 +57,20 @@ namespace Ultra.Services
             }
         }
 
-        public async Task<string> Search(SearchQuery query)
-        {
-            var response = await _httpClient.PostAsync(ApiUrl, GetContent(query));
+        //public async Task<string> Search(SearchQuery query)
+        //{
+        //    return await Retrieve(query);
+        //}
 
-            return await ProcessResponse(response);
-        }
+        //public async Task<string> GetNutrientReport(NutrientReportQuery query)
+        //{
+        //    return await Retrieve(query);
+        //}
 
-        public async Task<string> GetNutrientReport(NutrientReportQuery query)
-        {
-            var response = await _httpClient.PostAsync(ApiUrl, GetContent(query));
-
-            return await ProcessResponse(response);
-        }
+        //public async Task<string> GetNutrientList(NutrientListQuery query)
+        //{
+        //    return await Retrieve(query);
+        //}
 
         //private HttpClient GetHttpClient()
         //{
@@ -78,23 +79,47 @@ namespace Ultra.Services
         //    return client;
         //}
 
-        private HttpContent GetContent<T>(T query)
+
+        //private HttpContent GetContent<T>(T query)
+        //{
+        //    var json = JsonConvert.SerializeObject(query);
+        //    var content = new StringContent(json);
+        //    content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+        //    return content;
+        //}
+
+        //private async Task<string> ProcessResponse(HttpResponseMessage response)
+        //{
+        //    if (!response.IsSuccessStatusCode)
+        //        throw new ApplicationException(
+        //            $"Error while requesting API: status {response.StatusCode}, response: {await response.Content.ReadAsStringAsync()}");
+
+        //    var str = await response.Content.ReadAsStringAsync();
+
+        //    return str;
+        //}
+
+        public async Task<string> Retrieve<T>(T query)
         {
-            var json = JsonConvert.SerializeObject(query);
-            var content = new StringContent(json);
-            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            return content;
-        }
+            try
+            {
+                var json = JsonConvert.SerializeObject(query);
+                var content = new StringContent(json);
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-        private async Task<string> ProcessResponse(HttpResponseMessage response)
-        {
-            if (!response.IsSuccessStatusCode)
-                throw new ApplicationException(
-                    $"Error while requesting API: status {response.StatusCode}, response: {await response.Content.ReadAsStringAsync()}");
+                var response = await _httpClient.PostAsync(ApiUrl, content);
 
-            var str = await response.Content.ReadAsStringAsync();
+                if (!response.IsSuccessStatusCode)
+                    throw new ApplicationException(
+                        $"Error while requesting API: status {response.StatusCode}, response: {await response.Content.ReadAsStringAsync()}");
 
-            return str;
+                return await response.Content.ReadAsStringAsync();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
     }
 }

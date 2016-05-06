@@ -75,8 +75,23 @@ namespace Ultra.Services.Tests
         {
             var nutrientList = JsonConvert.DeserializeObject<NutrientListResult>(_result);
             Assert.IsNotNull(nutrientList);
-            Assert.IsTrue(nutrientList.Items.Count > 0);
+            Assert.IsNotNull(nutrientList.NutrientList);
+            Assert.IsNotNull(nutrientList.NutrientList.Items);
+            Assert.AreEqual("f", nutrientList.NutrientList.ListType);
+            Assert.IsTrue(nutrientList.NutrientList.Items.Count > 0);
         }
+
+        [Then(@"the result should be a list of nutrients")]
+        public void ThenTheResultShouldBeAListOfNutrients()
+        {
+            var nutrientList = JsonConvert.DeserializeObject<NutrientListResult>(_result);
+            Assert.IsNotNull(nutrientList);
+            Assert.IsNotNull(nutrientList.NutrientList);
+            Assert.IsNotNull(nutrientList.NutrientList.Items);
+            Assert.AreEqual("n", nutrientList.NutrientList.ListType);
+            Assert.IsTrue(nutrientList.NutrientList.Items.Count > 0);
+        }
+
 
     }
 }

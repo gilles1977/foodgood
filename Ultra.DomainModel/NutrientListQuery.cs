@@ -16,7 +16,7 @@ namespace Ultra.DomainModel
         [DataMember(Name = "max", EmitDefaultValue = false)]
         public int Max { get; set; }
 
-        [DataMember(Name = "offset", EmitDefaultValue = true)]
+        [DataMember(Name = "offset", EmitDefaultValue = false)]
         public int Offset { get; set; }
 
         [DataMember(Name = "sort", EmitDefaultValue = false)]

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -10,37 +11,43 @@ namespace Ultra.DomainModel
     [DataContract]
     public class NutrientListResult
     {
-        [DataMember(Name = "type")]
+        [DataMember, JsonProperty(PropertyName = "list")]
+        public NutrientList NutrientList { get; set; }
+    }
+    
+    public class NutrientList
+    {
+        [DataMember, JsonProperty(PropertyName = "lt")]
         public string ListType { get; set; }
 
-        [DataMember(Name = "start")]
+        [DataMember, JsonProperty(PropertyName = "start")]
         public int Start { get; set; }
 
-        [DataMember(Name = "end")]
+        [DataMember, JsonProperty(PropertyName = "end")]
         public int End { get; set; }
 
-        [DataMember(Name = "total")]
+        [DataMember, JsonProperty(PropertyName = "total")]
         public int Total { get; set; }
 
-        [DataMember(Name = "sort")]
+        [DataMember, JsonProperty(PropertyName = "sort")]
         public string Sort { get; set; }
 
-        [DataMember(Name = "sr")]
+        [DataMember, JsonProperty(PropertyName = "sr")]
         public string StandardRelease { get; set; }
 
-        [DataMember(Name = "item")]
+        [DataMember, JsonProperty(PropertyName = "item")]
         public IList<ListItem> Items { get; set; }
     }
 
     public class ListItem
     {
-        [DataMember(Name = "offset")]
+        [DataMember, JsonProperty(PropertyName = "offset")]
         public int Offset { get; set; }
 
-        [DataMember(Name = "id")]
+        [DataMember, JsonProperty(PropertyName = "id")]
         public string Id { get; set; }
 
-        [DataMember(Name = "name")]
+        [DataMember, JsonProperty(PropertyName = "name")]
         public string Name { get; set; }
     }
 }

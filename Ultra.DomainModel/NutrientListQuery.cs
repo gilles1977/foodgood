@@ -14,10 +14,10 @@ namespace Ultra.DomainModel
         public string ListType { get; set; }
 
         [DataMember(Name = "max", EmitDefaultValue = false)]
-        public int Max { get; set; }
+        public string Max { get; set; }
 
         [DataMember(Name = "offset", EmitDefaultValue = false)]
-        public int Offset { get; set; }
+        public string Offset { get; set; }
 
         [DataMember(Name = "sort", EmitDefaultValue = false)]
         public string Sort { get; set; }

@@ -49,6 +49,16 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ultra.DomainModel\Ultra.DomainModel.csproj">
+      <Project>{800361c0-78c6-4ccf-a313-1bb0cf86b8fe}</Project>
+      <Name>Ultra.DomainModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ultra.Services\Ultra.Services.csproj">
+      <Project>{618aed09-8010-4ac1-841d-5ad8e7c363c6}</Project>
+      <Name>Ultra.Services</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

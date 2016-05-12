@@ -47,7 +47,7 @@ namespace Ultra.Services.Tests
         public void WhenIQueryTheAPIForTheNutrientsAndAndForFoodGroup(string nutrient1, string nutrient2, string foodGroup)
         {
             var query = new NutrientReportQuery()
-            { Nutrients = new List<String>() { nutrient1, nutrient2 }, FoodGroup = foodGroup, Max = 50, Offset = 0 };
+            { Nutrients = new List<String>() { nutrient1, nutrient2 }, FoodGroup = foodGroup, Max = "50", Offset = "0" };
             _result = _service.Retrieve(query).Result;
         }
                 
